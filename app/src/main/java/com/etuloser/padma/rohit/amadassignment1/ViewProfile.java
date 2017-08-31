@@ -32,6 +32,7 @@ public class ViewProfile extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     String utoken;
     String uemail;
+    String upassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +40,12 @@ public class ViewProfile extends AppCompatActivity {
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String token =sharedpreferences.getString("usertoken",null);
         String email =sharedpreferences.getString("useremail",null);
-
+        String pwd=sharedpreferences.getString("userpassword",null);
         init();
         Rview(token);
         utoken=token;
         uemail=email;
+        upassword=pwd;
     }
 
     public void init(){
@@ -187,7 +189,9 @@ public class ViewProfile extends AppCompatActivity {
         u.setAge(age.getText().toString());
         u.setWeight(weight.getText().toString());
         u.setEmail(uemail);
+        u.setPassword(upassword);
         ur.setUser(u);
+
         Rupdate(ur);
         getuser(ur.getUser());
 

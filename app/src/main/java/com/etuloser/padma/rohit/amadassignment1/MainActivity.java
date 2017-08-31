@@ -39,6 +39,7 @@ EditText username,password;
         password=(EditText)findViewById(R.id.editTextPassword);
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String token =sharedpreferences.getString("usertoken",null);
+
 if(token!=null)
 {
     Intent i=new Intent(this,Profile.class);
@@ -80,7 +81,7 @@ if(token!=null)
     }
 
 
-    public void Rlogin(loginrequest lr)
+    public void Rlogin(final loginrequest lr)
     {
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(IConstant.url)
@@ -97,7 +98,7 @@ if(token!=null)
 
 
                     if (response.body().getCode().equals("200")) {
-                        onsuccesslogin(response.body().token,response.body().email);
+                        onsuccesslogin(response.body().token,response.body().email,lr.getPassword());
                         onloginerror(response.body().getSuccess());
                         Log.d("Response:", String.valueOf(response.body().getToken()) + " " + response.body().getCode() + " " + response.body().getSuccess());
                     } else {
@@ -125,11 +126,13 @@ if(token!=null)
     {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
-    public void onsuccesslogin(String token,String email)
+    public void onsuccesslogin(String token,String email,String passwor)
     {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString("usertoken",token);
 editor.putString("useremail",email);
+        editor.putString("userpassword",passwor);
+
         editor.commit();
         Intent i=new Intent(this,Profile.class);
         startActivity(i);
