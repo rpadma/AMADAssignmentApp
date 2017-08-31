@@ -27,6 +27,7 @@ public class Profile extends AppCompatActivity {
     {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear();
+        editor.commit();
         Snackbar.make(v, "Logged out", Snackbar.LENGTH_LONG).show();
         Intent i=new Intent(this, MainActivity.class);
         startActivity(i);

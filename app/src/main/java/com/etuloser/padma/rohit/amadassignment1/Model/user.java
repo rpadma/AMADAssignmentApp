@@ -11,6 +11,15 @@ public class user {
     public String weight;
     public String email;
     public String address;
+    public String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getName() {
         return name;
