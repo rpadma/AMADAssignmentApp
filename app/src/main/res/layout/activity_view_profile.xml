@@ -135,7 +135,7 @@
 
 
                 <Button
-                    android:id="@+id/profileSave"
+                    android:id="@+id/VEdit"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="38dp"
@@ -148,7 +148,7 @@
 
 
                 <Button
-                    android:id="@+id/profileCancel"
+                    android:id="@+id/VCancel"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="38dp"
@@ -160,7 +160,7 @@
                     />
 
                 <Button
-                    android:id="@+id/sign_up_register_btn"
+                    android:id="@+id/VSave"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="38dp"

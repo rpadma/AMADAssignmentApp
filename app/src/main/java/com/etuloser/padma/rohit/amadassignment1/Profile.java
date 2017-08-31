@@ -34,4 +34,12 @@ public class Profile extends AppCompatActivity {
         finish();
 
     }
+
+    public void ViewProfile(View v)
+    {
+        Intent i =new Intent(this,ViewProfile.class);
+        startActivity(i);
+    }
+
+
 }
