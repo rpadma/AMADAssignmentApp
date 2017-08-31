@@ -93,20 +93,23 @@ if(token!=null)
         call.enqueue(new Callback<loginresponse>() {
             @Override
             public void onResponse(Response<loginresponse> response, Retrofit retrofit) {
-                try{
+                try {
 
 
-onsuccesslogin(response.body().token);
-                    Log.d("Response:",String.valueOf(response.body().getToken())+" "+response.body().getCode()+" "+response.body().getSuccess());
+                    if (response.body().getCode().equals("200")) {
+                        onsuccesslogin(response.body().token,response.body().email);
+                        onloginerror(response.body().getSuccess());
+                        Log.d("Response:", String.valueOf(response.body().getToken()) + " " + response.body().getCode() + " " + response.body().getSuccess());
+                    } else {
 
-                }
-                catch (Exception e)
-                {
-                    Log.d("OnResponse","There is a error");
+                        onloginerror(response.body().getSuccess());
+                    }
+
+                } catch (Exception e) {
+                    Log.d("OnResponse", "There is a error");
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Throwable t) {
 
@@ -118,10 +121,15 @@ onsuccesslogin(response.body().token);
 
 
 
-    public void onsuccesslogin(String token)
+    public void onloginerror(String msg)
+    {
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+    public void onsuccesslogin(String token,String email)
     {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString("usertoken",token);
+editor.putString("useremail",email);
         editor.commit();
         Intent i=new Intent(this,Profile.class);
         startActivity(i);

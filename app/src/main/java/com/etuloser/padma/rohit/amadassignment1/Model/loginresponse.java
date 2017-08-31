@@ -10,6 +10,7 @@ public class loginresponse {
     public String token;
     public String success;
     public String message;
+    public String email;
 
     public String getCode() {
         return code;

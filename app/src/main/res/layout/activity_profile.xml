@@ -18,6 +18,8 @@
         android:layout_weight="1"
         android:text="View Profile"
         android:onClick="ViewProfile"
+        android:background="@color/colorAccent"
+
         />
 
     <Button
@@ -26,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:onClick="OnLogout"
+        android:background="@color/colorAccent"
         android:text="Logout" />
 
 </LinearLayout>

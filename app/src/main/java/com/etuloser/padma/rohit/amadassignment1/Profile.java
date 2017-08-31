@@ -23,6 +23,7 @@ public class Profile extends AppCompatActivity {
     }
 
 
+
     public void OnLogout(View v)
     {
         SharedPreferences.Editor editor = sharedpreferences.edit();

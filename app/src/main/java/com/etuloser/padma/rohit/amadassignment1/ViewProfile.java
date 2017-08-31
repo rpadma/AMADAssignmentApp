@@ -30,18 +30,20 @@ public class ViewProfile extends AppCompatActivity {
     Button btnsave,btnedit,btncancel;
     public static final String MyPREFERENCES = "MyPrefs";
     SharedPreferences sharedpreferences;
-String utoken;
-
+    String utoken;
+    String uemail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String token =sharedpreferences.getString("usertoken",null);
+        String email =sharedpreferences.getString("useremail",null);
+
         init();
         Rview(token);
         utoken=token;
-
+        uemail=email;
     }
 
     public void init(){
@@ -77,7 +79,7 @@ String utoken;
                 try{
 
                 // Log.d("code",String.valueOf(response.isSuccess()));
-                  user ur=new user();
+                    user ur=new user();
                     ur.setEmail(response.body().getUser().getEmail());
                     ur.setName(response.body().getUser().getName());
                     ur.setWeight(response.body().getUser().getWeight());
@@ -115,6 +117,16 @@ String utoken;
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        String token =sharedpreferences.getString("usertoken",null);
+        Rview(token);
+
+    }
+
 
 
     public void Rupdate(updaterequest ur)
@@ -134,10 +146,10 @@ String utoken;
             public void onResponse(Response<loginresponse> response, Retrofit retrofit) {
                 try{
 
-                    if(response.body().getCode().equals(200)) {
+                    if(response.body().getCode().equals("200")) {
                         Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_SHORT).show();
                     }
-                        // Log.d("Response:",String.valueOf(response.body().getUser().getName())+" "+response.body().getUser().getAge()+" "+response.body().getUser().getAddress());
+                   // Log.d("Response:",String.valueOf(response.body().getName())+" "+response.body().getUser().getAge()+" "+response.body().getUser().getAddress());
 
                 }
                 catch (Exception e)
@@ -174,6 +186,7 @@ String utoken;
         u.setName(name.getText().toString());
         u.setAge(age.getText().toString());
         u.setWeight(weight.getText().toString());
+        u.setEmail(uemail);
         ur.setUser(u);
         Rupdate(ur);
         getuser(ur.getUser());
